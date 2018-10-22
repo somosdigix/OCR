@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace ExtractOcrApi.Infra.OCR
+namespace Ocr.Infra.ExtracaoDeOcr
 {
   public static class ShellHelper
   {

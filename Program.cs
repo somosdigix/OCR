@@ -1,10 +1,10 @@
 ﻿using System;
-using ExtractOcrApi.Infra.Fila;
-using ExtractOcrApi.Infra.Fila.Configuracao;
+using Ocr.Infra.Fila;
+using Ocr.Infra.Fila.Configuracao;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ExtractOcrApi
+namespace Ocr
 {
   public class Program
     {

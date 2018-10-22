@@ -3,9 +3,9 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using ExtractOcrApi.Infra.DTO;
+using Ocr.DTO;
 
-namespace ExtractOcrApi.Infra.OCR
+namespace Ocr.Infra.ExtracaoDeOcr
 {
   public class Arquivo
   {

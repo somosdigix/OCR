@@ -1,19 +1,19 @@
 using System;
-using ExtractOcrApi.Infra.DTO;
-using ExtractOcrApi.Infra.Fila.Configuracao;
-using ExtractOcrApi.Infra.OCR;
+using Ocr.Infra.Fila.Configuracao;
 using Newtonsoft.Json;
+using Ocr.Infra.ExtracaoDeOcr;
+using Ocr.DTO;
 
-namespace ExtractOcrApi.Infra.Fila.Topico
+namespace Ocr.Infra.Fila.Topico
 {
   public class ArquivoNaoProcessado
   {
     private ConfiguracaoDaFila _configuracaoDaFila;
-    private Ocr _ocr;
+    private ExtracaoDeTexto _ocr;
     private ArquivoProcessado _arquivoProcessado;
     private ArquivoComErro _arquivoComErro;
 
-    public ArquivoNaoProcessado(ConfiguracaoDaFila configuracaoDaFila, Ocr ocr,
+    public ArquivoNaoProcessado(ConfiguracaoDaFila configuracaoDaFila, ExtracaoDeTexto ocr,
       ArquivoProcessado arquivoProcessado, ArquivoComErro arquivoComErro)
     {
       _configuracaoDaFila = configuracaoDaFila;

@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
-using ExtractOcrApi.Infra.DTO;
-using ExtractOcrApi.Infra.OCR;
 using Microsoft.AspNetCore.Mvc;
+using Ocr.DTO;
+using Ocr.Infra.ExtracaoDeOcr;
 
-namespace ExtractOcrApi.Controllers
+namespace Ocr.Controllers
 {
   [Route("/")]
   [ApiController]
   public class OcrController : ControllerBase
   {
-    private readonly Ocr _ocr;
+    private readonly ExtracaoDeTexto _ocr;
 
-    public OcrController(Ocr ocr)
+    public OcrController(ExtracaoDeTexto ocr)
     {
       _ocr = ocr;
     }

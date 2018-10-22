@@ -1,22 +1,20 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using ExtractOcrApi.Infra.DTO;
 using Microsoft.AspNetCore.Hosting;
+using Ocr.DTO;
 
-namespace ExtractOcrApi.Infra.OCR
+namespace Ocr.Infra.ExtracaoDeOcr
 {
-  public class Ocr
+  public class ExtracaoDeTexto
   {
     private readonly IHostingEnvironment _environment;
     private readonly Arquivo _arquivo;
-    private readonly ExtracaoDeTexto _extracaoDeTexto;
 
-    public Ocr(IHostingEnvironment environment, Arquivo arquivo, ExtracaoDeTexto extracaoDeTexto)
+    public ExtracaoDeTexto(IHostingEnvironment environment, Arquivo arquivo)
     {
       _environment = environment;
       _arquivo = arquivo;
-      _extracaoDeTexto = extracaoDeTexto;
     }
 
     public async Task<ExtracaoDeTextoDto> ExtrairTextoDaImagem(string url, string extensao)
@@ -28,7 +26,7 @@ namespace ExtractOcrApi.Infra.OCR
       var resultado = await _arquivo.Obter(url, extensao, _environment.ContentRootPath);
       if (!resultado.Sucesso) return new ExtracaoDeTextoDto { Erro = resultado.Erro };
 
-      var textoExtraido = await _extracaoDeTexto.Extrair(extensao, resultado.CaminhoDoArquivo);
+      var textoExtraido = await Extrair(extensao, resultado.CaminhoDoArquivo);
       await _arquivo.Excluir(resultado.CaminhoDoArquivo);
 
       return new ExtracaoDeTextoDto { Texto = textoExtraido };
@@ -41,6 +39,18 @@ namespace ExtractOcrApi.Infra.OCR
         || extensao.Contains("docx")
         || extensao.Contains("jpeg")
         || extensao.Contains("jpg"));
+    }
+
+    public async Task<string> Extrair(string extensao, string caminhoDoArquivo)
+    {
+      if (extensao == "jpeg" || extensao == "jpg" || extensao == "png")
+        return await $"tesseract {caminhoDoArquivo} stdout".Bash();
+      if (extensao == "pdf")
+        return await $"pdf2txt.py {caminhoDoArquivo}".Bash();
+      if (extensao == "docx")
+        return await $"docx2txt {caminhoDoArquivo}".Bash();
+
+      return string.Empty;
     }
   }
 }

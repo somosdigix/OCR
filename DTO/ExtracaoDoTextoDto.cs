@@ -1,4 +1,4 @@
-namespace ExtractOcrApi.Infra.DTO
+namespace Ocr.DTO
 {
   public class ExtracaoDeTextoDto
   {

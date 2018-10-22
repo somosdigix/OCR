@@ -1,8 +1,8 @@
-using ExtractOcrApi.Infra.DTO;
-using ExtractOcrApi.Infra.Fila.Configuracao;
+using Ocr.Infra.Fila.Configuracao;
 using Newtonsoft.Json;
+using Ocr.DTO;
 
-namespace ExtractOcrApi.Infra.Fila.Topico
+namespace Ocr.Infra.Fila.Topico
 {
   public class ArquivoProcessado
   {

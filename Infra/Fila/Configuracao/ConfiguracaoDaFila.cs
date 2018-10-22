@@ -3,7 +3,7 @@ using System.Text;
 using Confluent.Kafka;
 using Confluent.Kafka.Serialization;
 
-namespace ExtractOcrApi.Infra.Fila.Configuracao
+namespace Ocr.Infra.Fila.Configuracao
 {
   public class ConfiguracaoDaFila
   {

@@ -28,4 +28,4 @@ RUN pip install docx2txt
 WORKDIR /app
 COPY --from=build-env /app/out .
 EXPOSE 3000
-ENTRYPOINT ["dotnet", "ExtractOcrApi.dll"]
+ENTRYPOINT ["dotnet", "Ocr.dll"]

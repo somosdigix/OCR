@@ -1,4 +1,4 @@
-namespace ExtractOcrApi.Infra.Fila.Configuracao
+namespace Ocr.Infra.Fila.Configuracao
 {
   public static class Ambiente
   {

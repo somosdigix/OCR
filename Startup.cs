@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
-using ExtractOcrApi.Infra.Fila.Configuracao;
-using ExtractOcrApi.Infra.Fila.Topico;
-using ExtractOcrApi.Infra.OCR;
+using Ocr.Infra.Fila.Configuracao;
+using Ocr.Infra.Fila.Topico;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ocr.Infra.ExtracaoDeOcr;
 
-namespace ExtractOcrApi
+namespace Ocr
 {
   public class Startup
   {
@@ -27,8 +27,7 @@ namespace ExtractOcrApi
       var serviceProvider = services
         .AddSingleton<IHostingEnvironment>(_environment)
         .AddSingleton<Arquivo>(new Arquivo())
-        .AddSingleton<ExtracaoDeTexto>(new ExtracaoDeTexto())
-        .AddSingleton<Ocr>()
+        .AddSingleton<ExtracaoDeTexto>()
         .AddSingleton<ConfiguracaoDaFila>()
         .AddSingleton<ArquivoNaoProcessado>()
         .AddSingleton<ArquivoProcessado>()

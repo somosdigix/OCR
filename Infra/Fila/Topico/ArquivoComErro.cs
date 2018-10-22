@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using ExtractOcrApi.Infra.Fila.Configuracao;
+using Ocr.Infra.Fila.Configuracao;
 
-namespace ExtractOcrApi.Infra.Fila.Topico
+namespace Ocr.Infra.Fila.Topico
 {
   public class ArquivoComErro
   {
