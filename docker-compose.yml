@@ -1,0 +1,38 @@
+version: "3"
+services:
+  kafka:
+    image: "johnnypark/kafka-zookeeper"
+    network_mode: "host"
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      ADVERTISED_HOST: 127.0.0.1
+    logging:
+      driver: none
+  teixeiract:
+    network_mode: "host"
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_KAFKA: "localhost:9092"
+      FILA_DE_DOCUMENTOS_NAO_PROCESSADOS: "ArquivosNaoProcessados_Dev"
+      FILA_DE_DOCUMENTOS_PROCESSADOS: "ArquivosProcessados_Dev"
+      FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS: "ArquivosComErro_Dev"
+    depends_on:
+      - "kafka"
+  workerdohorus:
+    build:
+      context: '..\Horus\src\workers\FilaDeOcr'
+    network_mode: "host"
+    environment:
+      CONNECTION_STRING: "Data Source=192.168.0.4;Initial Catalog=Horus_dev;User ID=horus;Password=hrs;"
+      ENDERECO_HORUS: "http://192.168.0.235:8080"
+      HOST_KAFKA: "localhost:9092"
+      FILA_DE_DOCUMENTOS_NAO_PROCESSADOS: "ArquivosNaoProcessados_Dev"
+      FILA_DE_DOCUMENTOS_PROCESSADOS: "ArquivosProcessados_Dev"
+      FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS: "ArquivosComErro_Dev"
+    depends_on:
+      - "kafka"
