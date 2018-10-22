@@ -1,4 +1,4 @@
-# ExtractOcrApi
+# OCR
 
 A API in .Net Core to extract documents OCR with many libs like Tesseract, PDF2Text and Doc2Txt.
 
