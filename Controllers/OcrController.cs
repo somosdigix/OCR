@@ -20,10 +20,10 @@ namespace Ocr.Controllers
     public string Info()
     {
       return
-          @"GET /ocr?url=url_do_documento&tipo=(pdf, docx, png, jpeg, jpg)";
+          @"GET /processar?url=url_do_documento&tipo=(pdf, docx, png, jpeg, jpg)";
     }
 
-    [HttpGet, Route("ocr")]
+    [HttpGet, Route("processar")]
     public async Task<ExtracaoDeTextoDto> Ocr(string url, string tipo)
     {
       return await _ocr.ExtrairTextoDaImagem(url, tipo);
