@@ -14,7 +14,7 @@ namespace Ocr
             Ambiente.TopicoDoArquivoNaoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_NAO_PROCESSADOS");
             Ambiente.TopicoDoArquivoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_PROCESSADOS");
             Ambiente.TopicoDoArquivoComErro = Environment.GetEnvironmentVariable("FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS");
-            Ambiente.HostDaFila = Environment.GetEnvironmentVariable("localhost:9092");
+            Ambiente.HostDaFila = Environment.GetEnvironmentVariable("HOST_KAFKA");
             Console.WriteLine("Aplicação de OCR está sendo executada");
         }
 
