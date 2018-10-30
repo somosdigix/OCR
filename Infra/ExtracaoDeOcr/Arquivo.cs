@@ -18,7 +18,7 @@ namespace Ocr.Infra.ExtracaoDeOcr
         {
           if (!resultado.IsSuccessStatusCode)
             return new ProcessoDoArquivoDto { Sucesso = false, Erro = "Erro ao obter o arquivo" };
-            
+          
           var caminhoDoArquivo = GerarCaminhoDoArquivo(extensao, raizDoCaminho);
           bool salvou = await Salvar(resultado, caminhoDoArquivo);
           if (!salvou)

@@ -19,9 +19,7 @@ namespace Ocr.Infra.ExtracaoDeOcr
 
     public async Task<ExtracaoDeTextoDto> ExtrairTextoDaImagem(string url, string extensao)
     {
-      bool ehValidoParametros = ValidarParametros(url, extensao);
-      if (!ehValidoParametros)
-        return new ExtracaoDeTextoDto { Erro = "Parametros invalido" };
+      ValidarParametros(url, extensao);
 
       var resultado = await _arquivo.Obter(url, extensao, _environment.ContentRootPath);
       if (!resultado.Sucesso) return new ExtracaoDeTextoDto { Erro = resultado.Erro };
@@ -32,15 +30,21 @@ namespace Ocr.Infra.ExtracaoDeOcr
       return new ExtracaoDeTextoDto { Texto = textoExtraido };
     }
 
-    private static bool ValidarParametros(string url, string extensao)
+    private void ValidarParametros(string url, string extensao)
     {
-      return !string.IsNullOrEmpty(url)
-        && (extensao.Contains("pdf")
-        || extensao.Contains("docx")
-        || extensao.Contains("jpeg")
-        || extensao.Contains("jpg"));
+      if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(extensao))
+      {
+        throw new Exception("GET ?url=url_do_documento&tipo=(pdf, docx, png, jpeg, jpg)");
+      }
+      else if (!(extensao.Contains("jpg")
+          || extensao.Contains("jpeg")
+          || extensao.Contains("png")
+          || extensao.Contains("pdf")
+          || extensao.Contains("docx")))
+      {
+        throw new Exception($"A extensão {extensao} é invalido");
+      }
     }
-
     public async Task<string> Extrair(string extensao, string caminhoDoArquivo)
     {
       if (extensao == "jpeg" || extensao == "jpg" || extensao == "png")

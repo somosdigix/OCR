@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ocr.Infra.ExtracaoDeOcr;
+using OCR.Infra.Fila.Topico;
 
 namespace Ocr
 {
@@ -32,8 +33,10 @@ namespace Ocr
         .AddSingleton<ArquivoNaoProcessado>()
         .AddSingleton<ArquivoProcessado>()
         .AddSingleton<ArquivoComErro>()
+        .AddSingleton<ExecucaoDoWorker>()
         .BuildServiceProvider();
 
+      serviceProvider.GetService<ExecucaoDoWorker>().LogDaConexao();
       var arquivoNaoProcessado = serviceProvider.GetService<ArquivoNaoProcessado>();
       Task.Run(() => arquivoNaoProcessado.Consumir());
     }
