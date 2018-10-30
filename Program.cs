@@ -7,21 +7,25 @@ using Microsoft.AspNetCore.Hosting;
 namespace Ocr
 {
   public class Program
+  {
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-            Ambiente.TopicoDoArquivoNaoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_NAO_PROCESSADOS");
-            Ambiente.TopicoDoArquivoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_PROCESSADOS");
-            Ambiente.TopicoDoArquivoComErro = Environment.GetEnvironmentVariable("FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS");
-            Ambiente.HostDaFila = Environment.GetEnvironmentVariable("HOST_KAFKA");
-            Console.WriteLine("Aplicação de OCR está sendo executada");
-        }
+      CreateWebHostBuilder(args).Build().Run();
+      InserirVariaveisDeAmbiente();
+    }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    private static void InserirVariaveisDeAmbiente()
+    {
+      Ambiente.TopicoDoArquivoNaoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_NAO_PROCESSADOS");
+      Ambiente.TopicoDoArquivoProcessado = Environment.GetEnvironmentVariable("FILA_DE_DOCUMENTOS_PROCESSADOS");
+      Ambiente.TopicoDoArquivoComErro = Environment.GetEnvironmentVariable("FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS");
+      Ambiente.HostDaFila = Environment.GetEnvironmentVariable("HOST_KAFKA");
+    }
+
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
                 .UseUrls("http://*:3000/")
                 .UseStartup<Startup>();
-    }
+  }
 }

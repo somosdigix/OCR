@@ -5,7 +5,7 @@ using Ocr.Infra.ExtracaoDeOcr;
 
 namespace Ocr.Controllers
 {
-  [Route("/")]
+  [Route("")]
   [ApiController]
   public class OcrController : ControllerBase
   {
@@ -17,13 +17,6 @@ namespace Ocr.Controllers
     }
 
     [HttpGet, Route("")]
-    public string Info()
-    {
-      return
-          @"GET /processar?url=url_do_documento&tipo=(pdf, docx, png, jpeg, jpg)";
-    }
-
-    [HttpGet, Route("processar")]
     public async Task<ExtracaoDeTextoDto> Ocr(string url, string tipo)
     {
       return await _ocr.ExtrairTextoDaImagem(url, tipo);
