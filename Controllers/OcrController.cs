@@ -5,7 +5,7 @@ using Ocr.Infra.ExtracaoDeOcr;
 
 namespace Ocr.Controllers
 {
-  [Route("")]
+  [Route("/")]
   [ApiController]
   public class OcrController : ControllerBase
   {
