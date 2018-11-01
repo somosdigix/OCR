@@ -17,11 +17,12 @@ namespace Ocr.Infra.ExtracaoDeOcr
     private static Process ObterProcesso(string cmd)
     {
       var argumentos = cmd.Replace("\"", "\\\"");
+      
       return new Process()
       {
-        StartInfo = new ProcessStartInfo
+        StartInfo = new ProcessStartInfo("cmd.exe")
         {
-          FileName = "/bin/bash",
+          //FileName = "/bin/bash",
           Arguments = $"-c \"{argumentos}\"",
           RedirectStandardOutput = true,
           UseShellExecute = false,

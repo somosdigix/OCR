@@ -3,6 +3,8 @@ using Ocr.Infra.Fila;
 using Ocr.Infra.Fila.Configuracao;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using OCR.Infra.Bd;
+using Ocr.Infra.ExtracaoDeOcr;
 
 namespace Ocr
 {
@@ -10,8 +12,20 @@ namespace Ocr
   {
     public static void Main(string[] args)
     {
-      CreateWebHostBuilder(args).Build().Run();
-      InserirVariaveisDeAmbiente();
+      var repositorio = new ImagemRepositorio();
+      var imagem = repositorio.BuscarImagemNaoProcessada();
+      Console.WriteLine(imagem.Id);
+      
+      $"convert -density 300 -trim {imagem.Endereco}.pdf -quality 100 {imagem.Endereco}.png".Bash().Wait();
+      var ocrDaImagem = $"tesseract {imagem.Endereco}.png stdout".Bash().Result;
+
+      Console.WriteLine(ocrDaImagem);
+
+      repositorio.RemoverArquivo(imagem).Wait();
+      repositorio.AtualizarParaProcessado(imagem, ocrDaImagem);
+
+      //CreateWebHostBuilder(args).Build().Run();
+      //InserirVariaveisDeAmbiente();
     }
 
     private static void InserirVariaveisDeAmbiente()
