@@ -10,8 +10,8 @@ namespace Ocr
   {
     public static void Main(string[] args)
     {
-      CreateWebHostBuilder(args).Build().Run();
       InserirVariaveisDeAmbiente();
+      CreateWebHostBuilder(args).Build().Run();
     }
 
     private static void InserirVariaveisDeAmbiente()
