@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  kafka:
+    image: "johnnypark/kafka-zookeeper"
+    network_mode: "host"
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      ADVERTISED_HOST: 127.0.0.1
+    logging:
+      driver: none
+  ocr:
+    build:
+      context: './'
+    network_mode: "host"
+    ports:
+      - "3000:3000"
+    environment:
+      FILA_DE_DOCUMENTOS_NAO_PROCESSADOS: "HORUS_NAOPROCESSADOS"
+      FILA_DE_DOCUMENTOS_PROCESSADOS: "HORUS_PROCESSADOS"
+      FILA_DE_ERRO_NO_PROCESSAMENTO_DOS_DOCUMENTOS: "HORUS_PROCESSAMENTOCOMERRO"
+      HOST_KAFKA: "kafka:9092"
+    depends_on:
+      - kafka

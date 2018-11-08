@@ -12,7 +12,7 @@ namespace Ocr.Infra.Fila.Configuracao
     {
       _configuracaoDaFila = new Dictionary<string, object> {
                 { "group.id", "horus-group" },
-                { "bootstrap.servers", "localhost:9092" },
+                { "bootstrap.servers", Ambiente.HostDaFila },
                 { "auto.commit.interval.ms", 5000 },
                 { "auto.offset.reset", "earliest" }
             };
