@@ -4,22 +4,22 @@ using Ocr.DTO;
 
 namespace Ocr.Infra.Fila.Topico
 {
-  public class ArquivoProcessado
-  {
-    private ConfiguracaoDaFila _configuracaoDaFila;
-
-    public ArquivoProcessado(ConfiguracaoDaFila configuracaoDaFila)
+    public class ArquivoProcessado
     {
-      _configuracaoDaFila = configuracaoDaFila;
-    }
+        private readonly ConfiguracaoDaFila _configuracaoDaFila;
 
-    public void Produzir(ArquivoDto arquivoDto)
-    {
-      using (var produtor = _configuracaoDaFila.ObterProdutor())
-      {
-        var arquivoJson = JsonConvert.SerializeObject(arquivoDto);
-        produtor.ProduceAsync(Ambiente.TopicoDoArquivoProcessado, null, arquivoJson);
-      }
+        public ArquivoProcessado(ConfiguracaoDaFila configuracaoDaFila)
+        {
+            _configuracaoDaFila = configuracaoDaFila;
+        }
+
+        public void Produzir(ArquivoDto arquivoDto)
+        {
+            using (var produtor = _configuracaoDaFila.ObterProdutor())
+            {
+                var arquivoJson = JsonConvert.SerializeObject(arquivoDto);
+                produtor.ProduceAsync(Ambiente.TopicoDoArquivoProcessado, null, arquivoJson);
+            }
+        }
     }
-  }
 }
