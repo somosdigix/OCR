@@ -5,21 +5,23 @@ using Ocr.Infra.ExtracaoDeOcr;
 
 namespace Ocr.Controllers
 {
-  [Route("/")]
-  [ApiController]
-  public class OcrController : ControllerBase
-  {
-    private readonly ExtracaoDeTexto _ocr;
-
-    public OcrController(ExtracaoDeTexto ocr)
+    [Route("/")]
+    [ApiController]
+    public class OcrController : ControllerBase
     {
-      _ocr = ocr;
-    }
+        private readonly ExtracaoDeTexto _ocr;
 
-    [HttpGet, Route("")]
-    public async Task<ExtracaoDeTextoDto> Ocr(string url, string tipo)
-    {
-      return await _ocr.ExtrairTextoDaImagem(url, tipo);
+        public OcrController(ExtracaoDeTexto ocr)
+        {
+            _ocr = ocr;
+        }
+
+        [HttpGet, Route("")]
+        public async Task<ExtracaoDeTextoDto> Ocr(string url, string tipo)
+        {
+            if(!string.IsNullOrEmpty(url))
+                return await _ocr.ExtrairTextoDaImagem(url, tipo);
+            return null;
+        }
     }
-  }
 }

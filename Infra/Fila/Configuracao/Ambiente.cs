@@ -2,53 +2,50 @@ namespace Ocr.Infra.Fila.Configuracao
 {
   public static class Ambiente
   {
-    private static string topicoDoArquivoNaoProcessado;
-    private static string topicoDoArquivoProcessado;
-    private static string hostDaFila;
-    private static string topicoDoArquivoComErro;
+    private static string _topicoDoArquivoNaoProcessado;
+    private static string _topicoDoArquivoProcessado;
+    private static string _hostDaFila;
+    private static string _topicoDoArquivoComErro;
 
     public static string TopicoDoArquivoNaoProcessado
     {
-      get => string.IsNullOrEmpty(topicoDoArquivoNaoProcessado)
+      get => string.IsNullOrEmpty(_topicoDoArquivoNaoProcessado)
         ? "ArquivosNaoProcessados"
-        : topicoDoArquivoNaoProcessado;
+        : _topicoDoArquivoNaoProcessado;
       set
       {
-        topicoDoArquivoNaoProcessado = value;
+        _topicoDoArquivoNaoProcessado = value;
       }
     }
 
     public static string TopicoDoArquivoProcessado
     {
-      get => string.IsNullOrEmpty(topicoDoArquivoProcessado)
+      get => string.IsNullOrEmpty(_topicoDoArquivoProcessado)
         ? "ArquivosProcessados"
-        : topicoDoArquivoProcessado;
+        : _topicoDoArquivoProcessado;
       set
       {
-        topicoDoArquivoProcessado = value;
+        _topicoDoArquivoProcessado = value;
       }
     }
 
     public static string TopicoDoArquivoComErro
     {
-      get => string.IsNullOrEmpty(topicoDoArquivoComErro)
+      get => string.IsNullOrEmpty(_topicoDoArquivoComErro)
         ? "ArquivosComErro"
-        : topicoDoArquivoComErro;
+        : _topicoDoArquivoComErro;
       set
       {
-        topicoDoArquivoComErro = value;
+        _topicoDoArquivoComErro = value;
       }
     }
 
     public static string HostDaFila
     {
-      get => string.IsNullOrEmpty(hostDaFila)
+      get => string.IsNullOrEmpty(_hostDaFila)
           ? "localhost:9092"
-          : hostDaFila;
-      set
-      {
-        hostDaFila = value;
-      }
+          : _hostDaFila;
+      set => _hostDaFila = value;
     }
   }
 }
