@@ -37,10 +37,10 @@ namespace Ocr.Infra.Fila.Topico
                     {
                         ProcessarNovaMensagem(mensagem);
                     }
-                    catch
+                    catch(Exception erro)
                     {
                         _applicationInsights.NovoEvento("OCR:Erro no consumidor");
-                        _arquivoComErro.Produzir(mensagem.Value);
+                        _arquivoComErro.Produzir($"{mensagem.Value} | Exception {erro.Message}");
                     }
                 };
 

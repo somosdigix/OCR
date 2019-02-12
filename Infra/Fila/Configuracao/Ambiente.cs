@@ -45,7 +45,10 @@ namespace Ocr.Infra.Fila.Configuracao
       get => string.IsNullOrEmpty(_hostDaFila)
           ? "localhost:9092"
           : _hostDaFila;
-      set => _hostDaFila = value;
+      set
+      {
+        _hostDaFila = value;
+      }
     }
   }
 }

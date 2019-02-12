@@ -2,18 +2,18 @@
 
 namespace Ocr.Infra.Monitoramento
 {
-    public class ApplicationInsights
+  public class ApplicationInsights
+  {
+    private readonly TelemetryClient _telemetria;
+
+    public ApplicationInsights()
     {
-        private readonly TelemetryClient _telemetria;
-
-        public ApplicationInsights()
-        {
-            _telemetria = new TelemetryClient();
-        }
-
-        public void NovoEvento(string nomeDoEvento)
-        {
-            _telemetria.TrackEvent(nomeDoEvento);
-        }
+      _telemetria = new TelemetryClient();
     }
+
+    public void NovoEvento(string nomeDoEvento)
+    {
+      _telemetria.TrackEvent(nomeDoEvento);
+    }
+  }
 }

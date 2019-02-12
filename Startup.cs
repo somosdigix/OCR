@@ -37,6 +37,7 @@ namespace Ocr
                 .AddSingleton<ArquivoComErro>()
                 .AddSingleton<ExecucaoDoWorker>()
                 .AddSingleton<ApplicationInsights>()
+                .AddSingleton<LogDeErro>()
                 .BuildServiceProvider();
 
             serviceProvider.GetService<ExecucaoDoWorker>().LogDaConexao();
