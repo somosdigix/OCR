@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.ApplicationInsights.Extensibility;
 using Ocr.Infra.Fila.Configuracao;
 using Ocr.Infra.Fila.Topico;
@@ -47,10 +48,8 @@ namespace Ocr
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            InicializarApplicationInsights();
-
-            var applicationInsights = (ApplicationInsights) app.ApplicationServices.GetService(typeof(ApplicationInsights));
-            applicationInsights.NovoEvento("OCR: Iniciado");
+            InicializarApplicationInsights(app);
+            Console.WriteLine("Worker OCR sendo configurado");
 
             if (env.IsDevelopment())
             {
@@ -65,9 +64,12 @@ namespace Ocr
             app.UseMvc();
         }
 
-        private static void InicializarApplicationInsights()
+        private static void InicializarApplicationInsights(IApplicationBuilder app)
         {
-            TelemetryConfiguration.Active.InstrumentationKey = "720b68b3-e987-404f-bb69-0a5ba5844814";
+            TelemetryConfiguration.Active.InstrumentationKey = Ambiente.ApplicationInsightsId;
+
+            var applicationInsights = (ApplicationInsights)app.ApplicationServices.GetService(typeof(ApplicationInsights));
+            applicationInsights.NovoEvento("OCR: Iniciado");
         }
     }
 }

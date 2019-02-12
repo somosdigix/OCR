@@ -6,6 +6,7 @@ namespace Ocr.Infra.Fila.Configuracao
     private static string _topicoDoArquivoProcessado;
     private static string _hostDaFila;
     private static string _topicoDoArquivoComErro;
+    private static string _applicationInsights;
 
     public static string TopicoDoArquivoNaoProcessado
     {
@@ -21,12 +22,9 @@ namespace Ocr.Infra.Fila.Configuracao
     public static string TopicoDoArquivoProcessado
     {
       get => string.IsNullOrEmpty(_topicoDoArquivoProcessado)
-        ? "ArquivosProcessados"
+        ? "ArquivosProcessados_Dev"
         : _topicoDoArquivoProcessado;
-      set
-      {
-        _topicoDoArquivoProcessado = value;
-      }
+      set => _topicoDoArquivoProcessado = value;
     }
 
     public static string TopicoDoArquivoComErro
@@ -45,10 +43,15 @@ namespace Ocr.Infra.Fila.Configuracao
       get => string.IsNullOrEmpty(_hostDaFila)
           ? "localhost:9092"
           : _hostDaFila;
-      set
-      {
-        _hostDaFila = value;
-      }
+      set => _hostDaFila = value;
+    }
+
+    public static string ApplicationInsightsId
+    {
+      get => string.IsNullOrEmpty(_applicationInsights)
+          ? "720b68b3-e987-404f-bb69-0a5ba5844814"
+          : _applicationInsights;
+      set => _applicationInsights = value;
     }
   }
 }

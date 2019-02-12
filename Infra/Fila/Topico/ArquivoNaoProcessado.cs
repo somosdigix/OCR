@@ -28,17 +28,25 @@ namespace Ocr.Infra.Fila.Topico
 
         public void Consumir()
         {
+            Console.WriteLine("Iniciando comunicação com Kafka");
+
             using (var consumidor = _configuracaoDaFila.ObterConsumidor())
             {
+                Console.WriteLine("Comunicação com Kafka feita com sucesso");
+
                 consumidor.OnMessage += (_, mensagem)
                   =>
                 {
+                    Console.WriteLine($"Nova mensagem {DateTime.Now}");
+
                     try
                     {
                         ProcessarNovaMensagem(mensagem);
                     }
                     catch(Exception erro)
                     {
+                        Console.WriteLine("Falha na mensagem");
+
                         _applicationInsights.NovoEvento("OCR:Erro no consumidor");
                         _arquivoComErro.Produzir($"{mensagem.Value} | Exception {erro.Message}");
                     }
